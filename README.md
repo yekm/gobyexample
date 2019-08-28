@@ -33,6 +33,7 @@ Remove or edit google analytics id
 - [ ] write script to pull examples from upstream and trigger it from travis
 - [ ] post examples to play.golang.org via curl in Makefile and then sed s/%SOMETIHNG%/play.golang.url/ in  corresponding html file
 - [ ] debug strange behaviour like in command-line-flags.html
+- [ ] parse markdown in comments with some js library from cdn like Marked.js
 - [ ] move to pure.css and divs
 
 ### License
