@@ -40,7 +40,7 @@ clean: clean-bdeps
 gh-pages:
 	git branch -D gh-pages || true
 	git checkout --orphan gh-pages
-	mv -f build/index.html index.html
+	mv -f build/index.html .
 	rm -r e || true
 	mv -v build e
 	git reset
