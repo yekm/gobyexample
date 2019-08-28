@@ -1,0 +1,33 @@
+div {
+    //width: 25%;
+    //position: fixed;
+}
+table {
+    margin: 2em 2em 2em 2em;
+}
+table, td {
+    //border: 1px solid black;
+    vertical-align: top;
+}
+td.comment {
+    width: 20%;
+    padding-right: 10px;
+}
+td.code {
+    //padding: 5px 5px 5px 5px ;
+    width: 1%;
+}
+td.output {
+    //width: 20%;
+    color: darkgray;
+    padding-left: 10px;
+}
+tr.space {
+    height: 1em
+}
+pre {
+    margin: 0 0 0 0;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    border: 0px !important;
+}

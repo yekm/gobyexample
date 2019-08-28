@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+<table>
+{{ range . }}
+<tr class={{ .Class }}>
+    {{ if .Needtd }}
+    <td class=comment rowspan={{ .Rowspan }}>
+        {{ .Comment }}</td>{{ end }}
+    <td class=code><pre class="prettyprint">{{ .Code }}</pre></td>
+    <td class=output><pre>{{ .Stdout }}</pre></td>
+</tr>
+{{ end }}
+</table>
+</body>
