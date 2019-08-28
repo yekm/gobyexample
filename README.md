@@ -30,6 +30,7 @@ Remove or edit google analytics id
 
 - [ ] prettify index.html
 - [ ] add link to github for every example
+- [ ] add usual full example output below the table
 - [ ] write script to pull examples from upstream and trigger it from travis
 - [ ] post examples to play.golang.org via curl in Makefile and then sed s/%SOMETIHNG%/play.golang.url/ in  corresponding html file
 - [ ] debug strange behaviour like in command-line-flags.html
