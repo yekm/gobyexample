@@ -22,6 +22,19 @@ See `Makefile`
 Travis pushes to gh-pages. Set `DKEY` env var in travis
 settings to a base64 encoded content of your deploy key.
 
+### Forking
+
+Remove or edit google analytics id
+
+### TODO
+
+- [ ] prettify index.html
+- [ ] add link to github for every example
+- [ ] write script to pull examples from upstream and trigger it from travis
+- [ ] post examples to play.golang.org via curl in Makefile and then sed s/%SOMETIHNG%/play.golang.url/ in  corresponding html file
+- [ ] debug strange behaviour like in command-line-flags.html
+- [ ] move to pure.css and divs
+
 ### License
 
 This work is copyright Mark McGranaghan and licensed under a
