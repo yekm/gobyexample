@@ -5,14 +5,19 @@
 
 package main
 
-import "time"
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 
 	// For our example, suppose we're executing an external
 	// call that returns its result on a channel `c1`
-	// after 2s.
+	// after 2s. Note that the channel is buffered, so the
+	// send in the goroutine is nonblocking. This is a
+	// common pattern to prevent goroutine leaks in case the
+	// channel is never read.
 	c1 := make(chan string, 1)
 	go func() {
 		time.Sleep(2 * time.Second)
@@ -20,7 +25,7 @@ func main() {
 	}()
 
 	// Here's the `select` implementing a timeout.
-	// `res := <-c1` awaits the result and `<-Time.After`
+	// `res := <-c1` awaits the result and `<-time.After`
 	// awaits a value to be sent after the timeout of
 	// 1s. Since `select` proceeds with the first
 	// receive that's ready, we'll take the timeout case
