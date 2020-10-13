@@ -12,7 +12,9 @@ fromline=$(grep -n 'func main' $infile | head -n1 | cut -f1 -d:)
 toline=$(wc -l $infile | cut -f1 -d' ')
 for i in $(seq $fromline $toline); do
     head -n $i $infile >$t
-    echo '}' >>$t
+    co=$(grep '{' $t | wc -l)
+    cc=$(grep '}' $t | wc -l)
+    perl -e "print '}'x$(( $co - $cc ))" >>$t
     $(go env GOPATH)/bin/goimports $t >$ti
     ec=$?
     io=$tmp/$i.output # stdout of $i's shrink
