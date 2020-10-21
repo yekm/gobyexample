@@ -39,3 +39,4 @@ for i in $(seq $fromline $toline); do
     [ ! -s $ie ] && rm $ie # useless anyway
 done
 
+true
