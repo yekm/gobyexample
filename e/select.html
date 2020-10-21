@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Go&#39;s _select_ lets you wait on multiple channel operations. Combining goroutines and channels with select is a powerful feature of Go.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;time&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         For our example we&#39;ll select across two channels.</td>
+    <td class=code><pre class="prettyprint">	c1 := make(chan string)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	c2 := make(chan string)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=8>
+         Each channel will receive a value after some amount of time, to simulate e.g. blocking RPC operations executing in concurrent goroutines.</td>
+    <td class=code><pre class="prettyprint">	go func() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		time.Sleep(1 * time.Second)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		c1 &lt;- &#34;one&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	go func() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		time.Sleep(2 * time.Second)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		c2 &lt;- &#34;two&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=9>
+         We&#39;ll use `select` to await both of these values simultaneously, printing each one as it arrives.</td>
+    <td class=code><pre class="prettyprint">	for i := 0; i &lt; 2; i&#43;&#43; {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		select {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		case msg1 := &lt;-c1:</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			fmt.Println(&#34;received&#34;, msg1)</pre></td>
+    <td class=output><pre class=preo>received one
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		case msg2 := &lt;-c2:</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			fmt.Println(&#34;received&#34;, msg2)</pre></td>
+    <td class=output><pre class=preo>received two
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

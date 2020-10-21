@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         _Channels_ are the pipes that connect concurrent goroutines. You can send values into channels from one goroutine and receive those values into another goroutine.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import &#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         Create a new channel with `make(chan val-type)`. Channels are typed by the values they convey.</td>
+    <td class=code><pre class="prettyprint">	messages := make(chan string)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         _Send_ a value into a channel using the `channel &lt;-` syntax. Here we send `&#34;ping&#34;`  to the `messages` channel we made above, from a new goroutine.</td>
+    <td class=code><pre class="prettyprint">	go func() { messages &lt;- &#34;ping&#34; }()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         The `&lt;-channel` syntax _receives_ a value from the channel. Here we&#39;ll receive the `&#34;ping&#34;` message we sent above and print it out.</td>
+    <td class=code><pre class="prettyprint">	msg := &lt;-messages</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(msg)</pre></td>
+    <td class=output><pre class=preo>ping
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

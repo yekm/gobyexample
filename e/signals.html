@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Sometimes we&#39;d like our Go programs to intelligently handle [Unix signals](http://en.wikipedia.org/wiki/Unix_signal). For example, we might want a server to gracefully shutdown when it receives a `SIGTERM`, or a command-line tool to stop processing input if it receives a `SIGINT`. Here&#39;s how to handle signals in Go with channels.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=7>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;os&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;os/signal&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;syscall&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         Go signal notification works by sending `os.Signal` values on a channel. We&#39;ll create a channel to receive these notifications (we&#39;ll also make one to notify us when the program can exit).</td>
+    <td class=code><pre class="prettyprint">	sigs := make(chan os.Signal, 1)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	done := make(chan bool, 1)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         `signal.Notify` registers the given channel to receive notifications of the specified signals.</td>
+    <td class=code><pre class="prettyprint">	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=6>
+         This goroutine executes a blocking receive for signals. When it gets one it&#39;ll print it out and then notify the program that it can finish.</td>
+    <td class=code><pre class="prettyprint">	go func() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		sig := &lt;-sigs</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		fmt.Println()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		fmt.Println(sig)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		done &lt;- true</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=4>
+         The program will wait here until it gets the expected signal (as indicated by the goroutine above sending a value on `done`) and then exit.</td>
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;awaiting signal&#34;)</pre></td>
+    <td class=output><pre class=preo>awaiting signal
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&lt;-done</pre></td>
+    <td class=output><pre class=preo>
+terminated
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;exiting&#34;)</pre></td>
+    <td class=output><pre class=preo>exiting
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

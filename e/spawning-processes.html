@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Sometimes our Go programs need to spawn other, non-Go processes. For example, the syntax highlighting on this site is [implemented](https://github.com/mmcgrana/gobyexample/blob/master/tools/generate.go) by spawning a [`pygmentize`](http://pygments.org/) process from a Go program. Let&#39;s look at a few examples of spawning processes from Go.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=6>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;io/ioutil&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;os/exec&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         We&#39;ll start with a simple command that takes no arguments or input and just prints something to stdout. The `exec.Command` helper creates an object to represent this external process.</td>
+    <td class=code><pre class="prettyprint">	dateCmd := exec.Command(&#34;date&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=6>
+         `.Output` is another helper that handles the common case of running a command, waiting for it to finish, and collecting its output. If there were no errors, `dateOut` will hold bytes with the date info.</td>
+    <td class=code><pre class="prettyprint">	dateOut, err := dateCmd.Output()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	if err != nil {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		panic(err)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;&gt; date&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(string(dateOut))</pre></td>
+    <td class=output><pre class=preo>&gt; date
+Wed Oct 21 16:47:51 UTC 2020
+
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         Next we&#39;ll look at a slightly more involved case where we pipe data to the external process on its `stdin` and collect the results from its `stdout`.</td>
+    <td class=code><pre class="prettyprint">	grepCmd := exec.Command(&#34;grep&#34;, &#34;hello&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=7>
+         Here we explicitly grab input/output pipes, start the process, write some input to it, read the resulting output, and finally wait for the process to exit.</td>
+    <td class=code><pre class="prettyprint">	grepIn, _ := grepCmd.StdinPipe()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepOut, _ := grepCmd.StdoutPipe()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepCmd.Start()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepIn.Write([]byte(&#34;hello grep\ngoodbye grep&#34;))</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepIn.Close()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepBytes, _ := ioutil.ReadAll(grepOut)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	grepCmd.Wait()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         We omitted error checks in the above example, but you could use the usual `if err != nil` pattern for all of them. We also only collect the `StdoutPipe` results, but you could collect the `StderrPipe` in exactly the same way.</td>
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;&gt; grep hello&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(string(grepBytes))</pre></td>
+    <td class=output><pre class=preo>Wed Oct 21 16:47:56 UTC 2020
+
+&gt; grep hello
+hello grep
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=8>
+         Note that when spawning commands we need to provide an explicitly delineated command and argument array, vs. being able to just pass in one command-line string. If you want to spawn a full command with a string, you can use `bash`&#39;s `-c` option:</td>
+    <td class=code><pre class="prettyprint">	lsCmd := exec.Command(&#34;bash&#34;, &#34;-c&#34;, &#34;ls -a -l -h&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	lsOut, err := lsCmd.Output()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	if err != nil {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		panic(err)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;&gt; ls -a -l -h&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(string(lsOut))</pre></td>
+    <td class=output><pre class=preo>Wed Oct 21 16:47:59 UTC 2020
+
+&gt; ls -a -l -h
+total 4.1M
+drwxrwxr-x 7 travis travis 4.0K Oct 21 16:46 .
+drwxrwxr-x 3 travis travis 4.0K Oct 21 16:45 ..
+drwxrwxr-x 2 travis travis 4.0K Oct 21 16:47 examples
+drwxrwxr-x 8 travis travis 4.0K Oct 21 16:45 .git
+-rw-rw-r-- 1 travis travis   33 Oct 21 16:45 .gitignore
+-rw-rw-r-- 1 travis travis 1.3K Oct 21 16:45 Makefile
+-rwxrwxr-x 1 travis travis 4.1M Oct 21 16:46 maketable
+-rw-rw-r-- 1 travis travis 1.8K Oct 21 16:45 README.md
+drwxrwxr-x 2 travis travis 4.0K Oct 21 16:45 site
+drwxrwxr-x 3 travis travis 4.0K Oct 21 16:46 tmp
+drwxrwxr-x 2 travis travis 4.0K Oct 21 16:45 tools
+-rw-rw-r-- 1 travis travis  106 Oct 21 16:45 .travis.yml
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

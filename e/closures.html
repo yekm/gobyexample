@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Go supports [_anonymous functions_](http://en.wikipedia.org/wiki/Anonymous_function), which can form &lt;a href=&#34;http://en.wikipedia.org/wiki/Closure_(computer_science)&#34;&gt;&lt;em&gt;closures&lt;/em&gt;&lt;/a&gt;. Anonymous functions are useful when you want to define a function inline without having to name it.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import &#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=7>
+         This function `intSeq` returns another function, which we define anonymously in the body of `intSeq`. The returned function _closes over_ the variable `i` to form a closure.</td>
+    <td class=code><pre class="prettyprint">func intSeq() func() int {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	i := 0</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	return func() int {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		i&#43;&#43;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		return i</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         We call `intSeq`, assigning the result (a function) to `nextInt`. This function value captures its own `i` value, which will be updated each time we call `nextInt`.</td>
+    <td class=code><pre class="prettyprint">	nextInt := intSeq()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         See the effect of the closure by calling `nextInt` a few times.</td>
+    <td class=code><pre class="prettyprint">	fmt.Println(nextInt())</pre></td>
+    <td class=output><pre class=preo>1
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(nextInt())</pre></td>
+    <td class=output><pre class=preo>2
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(nextInt())</pre></td>
+    <td class=output><pre class=preo>3
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         To confirm that the state is unique to that particular function, create and test a new one.</td>
+    <td class=code><pre class="prettyprint">	newInts := intSeq()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(newInts())</pre></td>
+    <td class=output><pre class=preo>1
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         [Environment variables](http://en.wikipedia.org/wiki/Environment_variable) are a universal mechanism for [conveying configuration information to Unix programs](http://www.12factor.net/config). Let&#39;s look at how to set, get, and list environment variables.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=6>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;os&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;strings&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         To set a key/value pair, use `os.Setenv`. To get a value for a key, use `os.Getenv`. This will return an empty string if the key isn&#39;t present in the environment.</td>
+    <td class=code><pre class="prettyprint">	os.Setenv(&#34;FOO&#34;, &#34;1&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;FOO:&#34;, os.Getenv(&#34;FOO&#34;))</pre></td>
+    <td class=output><pre class=preo>FOO: 1
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;BAR:&#34;, os.Getenv(&#34;BAR&#34;))</pre></td>
+    <td class=output><pre class=preo>BAR: 
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=6>
+         Use `os.Environ` to list all key/value pairs in the environment. This returns a slice of strings in the form `KEY=value`. You can `strings.SplitN` them to get the key and value. Here we print all the keys.</td>
+    <td class=code><pre class="prettyprint">	fmt.Println()</pre></td>
+    <td class=output><pre class=preo>
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	for _, e := range os.Environ() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		pair := strings.SplitN(e, &#34;=&#34;, 2)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		fmt.Println(pair[0])</pre></td>
+    <td class=output><pre class=preo>PERLBREW_SHELLRC_VERSION
+NVM_INC
+MANPATH
+XDG_SESSION_ID
+TRAVIS_ARCH
+TRAVIS_FILTERED
+rvm_bin_path
+MYSQL_UNIX_PORT
+NVM_CD_FLAGS
+GEM_HOME
+PYENV_ROOT
+HAS_JOSH_K_SEAL_OF_APPROVAL
+TRAVIS_STACK_JOB_BOARD_REGISTER
+TERM
+TRAVIS_TEST_RESULT
+TRAVIS_STACK_LANGUAGES
+SHELL
+HISTSIZE
+MAKEFLAGS
+SSH_CLIENT
+IRBRC
+TRAVIS_COMMIT
+TRAVIS_APT_PROXY
+TRAVIS_OS_NAME
+TRAVIS_JOB_NAME
+TRAVIS_UID
+TRAVIS_INTERNAL_RUBY_REGEX
+MY_RUBY_HOME
+TRAVIS_ROOT
+SSH_TTY
+TRAVIS_TIMER_ID
+LC_ALL
+NVM_DIR
+USER
+HISTFILESIZE
+TRAVIS_GO_VERSION
+_TRAVIS_RESOLVED_GIMME_GO_VERSION_INT
+ANSI_GREEN
+TRAVIS_INFRA
+TRAVIS_LANGUAGE
+ANSI_RESET
+rvm_path
+TRAVIS_DIST
+TRAVIS
+MAKELEVEL
+TRAVIS_REPO_SLUG
+ANSI_YELLOW
+PYTHON_CONFIGURE_OPTS
+HAS_ANTARES_THREE_LITTLE_FRONZIES_BADGE
+DKEY
+TRAVIS_PULL_REQUEST
+PAGER
+TRAVIS_COMMIT_MESSAGE
+RACK_ENV
+TRAVIS_BUILD_STAGE_NAME
+GO111MODULE
+MFLAGS
+PERLBREW_ROOT
+TRAVIS_CMD
+TRAVIS_STACK_TIMESTAMP
+_TRAVIS_RESOLVED_GIMME_GO_VERSION
+TRAVIS_CPU_ARCH
+rvm_prefix
+MAIL
+PATH
+PYTHON_CFLAGS
+TRAVIS_JOB_WEB_URL
+TRAVIS_OSX_IMAGE
+TRAVIS_PULL_REQUEST_SHA
+TRAVIS_TMPDIR
+TRAVIS_BUILD_WEB_URL
+PWD
+APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE
+JAVA_HOME
+CONTINUOUS_INTEGRATION
+LANG
+TRAVIS_PRE_CHEF_BOOTSTRAP_TIME
+MERB_ENV
+TZ
+PERLBREW_HOME
+TRAVIS_ENABLE_INFRA_DETECTION
+TRAVIS_SUDO
+TRAVIS_TAG
+RBENV_SHELL
+TRAVIS_ALLOW_FAILURE
+GIMME_ENV
+TRAVIS_HOME
+HISTCONTROL
+GOMAXPROCS
+TRAVIS_INIT
+rvm_version
+PS4
+TRAVIS_JOB_NUMBER
+SHLVL
+HOME
+PYENV_SHELL
+TRAVIS_EVENT_TYPE
+LANGUAGE
+GOROOT
+ANSI_CLEAR
+RAILS_ENV
+TRAVIS_TIMER_START_TIME
+CI
+GIMME_GO_VERSION
+TRAVIS_BUILD_ID
+LOGNAME
+TRAVIS_STACK_FEATURES
+COMPOSER_NO_INTERACTION
+TRAVIS_PULL_REQUEST_SLUG
+GEM_PATH
+SSH_CONNECTION
+XDG_DATA_DIRS
+LC_CTYPE
+TRAVIS_SECURE_ENV_VARS
+DEBIAN_FRONTEND
+TRAVIS_STACK_NODE_ATTRIBUTES
+NVM_BIN
+GOPATH
+TRAVIS_STACK_NAME
+TRAVIS_APP_HOST
+GIT_ASKPASS
+TRAVIS_GO_IMPORT_PATH
+TRAVIS_BRANCH
+XDG_RUNTIME_DIR
+JRUBY_OPTS
+TRAVIS_COMMIT_RANGE
+TRAVIS_PULL_REQUEST_BRANCH
+ANSI_RED
+TRAVIS_JOB_ID
+RUBY_VERSION
+TRAVIS_BUILD_NUMBER
+TRAVIS_BUILD_DIR
+_
+FOO
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

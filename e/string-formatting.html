@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Go offers excellent support for string formatting in the `printf` tradition. Here are some examples of common string formatting tasks.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;os&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=4>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">type point struct {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	x, y int</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         Go offers several printing &#34;verbs&#34; designed to format general Go values. For example, this prints an instance of our `point` struct.</td>
+    <td class=code><pre class="prettyprint">	p := point{1, 2}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%v\n&#34;, p)</pre></td>
+    <td class=output><pre class=preo>{1 2}
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         If the value is a struct, the `%&#43;v` variant will include the struct&#39;s field names.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%&#43;v\n&#34;, p)</pre></td>
+    <td class=output><pre class=preo>{x:1 y:2}
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         The `%#v` variant prints a Go syntax representation of the value, i.e. the source code snippet that would produce that value.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%#v\n&#34;, p)</pre></td>
+    <td class=output><pre class=preo>main.point{x:1, y:2}
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         To print the type of a value, use `%T`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%T\n&#34;, p)</pre></td>
+    <td class=output><pre class=preo>main.point
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         Formatting booleans is straight-forward.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%t\n&#34;, true)</pre></td>
+    <td class=output><pre class=preo>true
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         There are many options for formatting integers. Use `%d` for standard, base-10 formatting.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%d\n&#34;, 123)</pre></td>
+    <td class=output><pre class=preo>123
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         This prints a binary representation.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%b\n&#34;, 14)</pre></td>
+    <td class=output><pre class=preo>1110
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         This prints the character corresponding to the given integer.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%c\n&#34;, 33)</pre></td>
+    <td class=output><pre class=preo>!
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         `%x` provides hex encoding.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%x\n&#34;, 456)</pre></td>
+    <td class=output><pre class=preo>1c8
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         There are also several formatting options for floats. For basic decimal formatting use `%f`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%f\n&#34;, 78.9)</pre></td>
+    <td class=output><pre class=preo>78.900000
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         `%e` and `%E` format the float in (slightly different versions of) scientific notation.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%e\n&#34;, 123400000.0)</pre></td>
+    <td class=output><pre class=preo>1.234000e&#43;08
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%E\n&#34;, 123400000.0)</pre></td>
+    <td class=output><pre class=preo>1.234000E&#43;08
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         For basic string printing use `%s`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%s\n&#34;, &#34;\&#34;string\&#34;&#34;)</pre></td>
+    <td class=output><pre class=preo>&#34;string&#34;
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         To double-quote strings as in Go source, use `%q`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%q\n&#34;, &#34;\&#34;string\&#34;&#34;)</pre></td>
+    <td class=output><pre class=preo>&#34;\&#34;string\&#34;&#34;
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         As with integers seen earlier, `%x` renders the string in base-16, with two output characters per byte of input.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%x\n&#34;, &#34;hex this&#34;)</pre></td>
+    <td class=output><pre class=preo>6865782074686973
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         To print a representation of a pointer, use `%p`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;%p\n&#34;, &amp;p)</pre></td>
+    <td class=output><pre class=preo>0xc000084010
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         When formatting numbers you will often want to control the width and precision of the resulting figure. To specify the width of an integer, use a number after the `%` in the verb. By default the result will be right-justified and padded with spaces.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;|%6d|%6d|\n&#34;, 12, 345)</pre></td>
+    <td class=output><pre class=preo>|    12|   345|
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         You can also specify the width of printed floats, though usually you&#39;ll also want to restrict the decimal precision at the same time with the width.precision syntax.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;|%6.2f|%6.2f|\n&#34;, 1.2, 3.45)</pre></td>
+    <td class=output><pre class=preo>0xc00001c1b0
+|  1.20|  3.45|
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         To left-justify, use the `-` flag.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;|%-6.2f|%-6.2f|\n&#34;, 1.2, 3.45)</pre></td>
+    <td class=output><pre class=preo>0xc00001c1a0
+|1.20  |3.45  |
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         You may also want to control width when formatting strings, especially to ensure that they align in table-like output. For basic right-justified width.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;|%6s|%6s|\n&#34;, &#34;foo&#34;, &#34;b&#34;)</pre></td>
+    <td class=output><pre class=preo>0xc00001c1b0
+|   foo|     b|
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         To left-justify use the `-` flag as with numbers.</td>
+    <td class=code><pre class="prettyprint">	fmt.Printf(&#34;|%-6s|%-6s|\n&#34;, &#34;foo&#34;, &#34;b&#34;)</pre></td>
+    <td class=output><pre class=preo>0xc000084010
+|foo   |b     |
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         So far we&#39;ve seen `Printf`, which prints the formatted string to `os.Stdout`. `Sprintf` formats and returns a string without printing it anywhere.</td>
+    <td class=code><pre class="prettyprint">	s := fmt.Sprintf(&#34;a %s&#34;, &#34;string&#34;)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(s)</pre></td>
+    <td class=output><pre class=preo>0xc00001c1b0
+a string
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         You can format&#43;print to `io.Writers` other than `os.Stdout` using `Fprintf`.</td>
+    <td class=code><pre class="prettyprint">	fmt.Fprintf(os.Stderr, &#34;an %s\n&#34;, &#34;error&#34;)</pre></td>
+    <td class=output><pre class=preo>0xc00001c1a0
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo>0xc000084010
+</pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

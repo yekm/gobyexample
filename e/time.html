@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Go offers extensive support for times and durations; here are some examples.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;time&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=3>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p := fmt.Println</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         We&#39;ll start by getting the current time.</td>
+    <td class=code><pre class="prettyprint">	now := time.Now()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(now)</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:00.904235185 &#43;0000 UTC m=&#43;0.000060923
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         You can build a `time` struct by providing the year, month, day, etc. Times are always associated with a `Location`, i.e. time zone.</td>
+    <td class=code><pre class="prettyprint">	then := time.Date(</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		2009, 11, 17, 20, 34, 58, 651387237, time.UTC)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then)</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:02.829757568 &#43;0000 UTC m=&#43;0.000048191
+2009-11-17 20:34:58.651387237 &#43;0000 UTC
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=8>
+         You can extract the various components of the time value as expected.</td>
+    <td class=code><pre class="prettyprint">	p(then.Year())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:03.886828998 &#43;0000 UTC m=&#43;0.000116610
+2009
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Month())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:04.171776848 &#43;0000 UTC m=&#43;0.000050367
+November
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Day())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:04.401686494 &#43;0000 UTC m=&#43;0.000052769
+17
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Hour())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:04.642399259 &#43;0000 UTC m=&#43;0.000052578
+20
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Minute())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:04.871653014 &#43;0000 UTC m=&#43;0.000048731
+34
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Second())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:05.130703371 &#43;0000 UTC m=&#43;0.000050559
+58
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Nanosecond())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:05.51746681 &#43;0000 UTC m=&#43;0.000071720
+651387237
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Location())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:05.747987175 &#43;0000 UTC m=&#43;0.000111400
+UTC
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         The Monday-Sunday `Weekday` is also available.</td>
+    <td class=code><pre class="prettyprint">	p(then.Weekday())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:06.421437974 &#43;0000 UTC m=&#43;0.000123589
+Tuesday
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         These methods compare two times, testing if the first occurs before, after, or at the same time as the second, respectively.</td>
+    <td class=code><pre class="prettyprint">	p(then.Before(now))</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:07.780311582 &#43;0000 UTC m=&#43;0.000048686
+true
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.After(now))</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:08.152713642 &#43;0000 UTC m=&#43;0.000054734
+false
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Equal(now))</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:08.420382232 &#43;0000 UTC m=&#43;0.000057123
+false
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         The `Sub` methods returns a `Duration` representing the interval between two times.</td>
+    <td class=code><pre class="prettyprint">	diff := now.Sub(then)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(diff)</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:09.601084795 &#43;0000 UTC m=&#43;0.000104919
+95780h19m10.949697558s
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=4>
+         We can compute the length of the duration in various units.</td>
+    <td class=code><pre class="prettyprint">	p(diff.Hours())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:10.698911627 &#43;0000 UTC m=&#43;0.000061010
+95780h19m12.04752439s
+95780.32001320121
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(diff.Minutes())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:10.933625349 &#43;0000 UTC m=&#43;0.000051448
+95780h19m12.282238112s
+95780.32007839947
+5.746819204703969e&#43;06
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(diff.Seconds())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:11.303285301 &#43;0000 UTC m=&#43;0.000069789
+95780h19m12.651898064s
+95780.32018108279
+5.746819210864968e&#43;06
+3.448091526518981e&#43;08
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(diff.Nanoseconds())</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:11.552612496 &#43;0000 UTC m=&#43;0.000050557
+95780h19m12.901225259s
+95780.32025034034
+5.746819215020421e&#43;06
+3.4480915290122527e&#43;08
+344809152901225259
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         You can use `Add` to advance a time by a given duration, or with a `-` to move backwards by a duration.</td>
+    <td class=code><pre class="prettyprint">	p(then.Add(diff))</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:12.905584776 &#43;0000 UTC m=&#43;0.000111276
+95780h19m14.254197539s
+95780.32062616598
+5.746819237569959e&#43;06
+3.4480915425419754e&#43;08
+344809154254197539
+2020-10-21 16:54:12.905584776 &#43;0000 UTC
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(then.Add(-diff))</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:13.133868895 &#43;0000 UTC m=&#43;0.000049627
+95780h19m14.482481658s
+95780.32068957824
+5.746819241374695e&#43;06
+3.4480915448248166e&#43;08
+344809154482481658
+2020-10-21 16:54:13.133868895 &#43;0000 UTC
+1998-12-15 00:15:44.168905579 &#43;0000 UTC
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo>2020-10-21 16:54:13.351398607 &#43;0000 UTC m=&#43;0.000052212
+95780h19m14.70001137s
+95780.32075000316
+5.746819245000189e&#43;06
+3.448091547000114e&#43;08
+344809154700011370
+2020-10-21 16:54:13.351398607 &#43;0000 UTC
+1998-12-15 00:15:43.951375867 &#43;0000 UTC
+</pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

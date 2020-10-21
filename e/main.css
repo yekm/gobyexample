@@ -1,0 +1,42 @@
+@media (min-width: 961px) {
+    table {
+        width: 90%;
+        margin: 2em auto auto auto;
+    }
+}
+@media (max-width: 961px) {
+    table {
+        width: 100%;
+        margin: 2em 2em 2em 2em;
+    }
+}
+
+table, td {
+    //border: 1px solid black;
+    vertical-align: top;
+}
+td.comment {
+    width: 50%;
+    padding-right: 10px;
+}
+td.code {
+    //padding: 5px 5px 5px 5px ;
+    width: 30%;
+}
+td.output {
+    width: 20%;
+    color: darkgray;
+    padding-left: 10px;
+}
+tr.space {
+    height: 1em
+}
+pre.preo {
+    white-space: pre-line;
+}
+pre {
+    margin: 0 0 0 0;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    border: 0px !important;
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         [Timers](timers) are for when you want to do something once in the future - _tickers_ are for when you want to do something repeatedly at regular intervals. Here&#39;s an example of a ticker that ticks periodically until we stop it.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;time&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=2>
+         Tickers use a similar mechanism to timers: a channel that is sent values. Here we&#39;ll use the `select` builtin on the channel to await the values as they arrive every 500ms.</td>
+    <td class=code><pre class="prettyprint">	ticker := time.NewTicker(500 * time.Millisecond)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	done := make(chan bool)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=11>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	go func() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		for {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			select {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			case &lt;-done:</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">				return</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			case t := &lt;-ticker.C:</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">				fmt.Println(&#34;Tick at&#34;, t)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}()</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=5>
+         Tickers can be stopped like timers. Once a ticker is stopped it won&#39;t receive any more values on its channel. We&#39;ll stop ours after 1600ms.</td>
+    <td class=code><pre class="prettyprint">	time.Sleep(1600 * time.Millisecond)</pre></td>
+    <td class=output><pre class=preo>Tick at 2020-10-21 16:49:16.221050216 &#43;0000 UTC m=&#43;0.500221756
+Tick at 2020-10-21 16:49:16.721060817 &#43;0000 UTC m=&#43;1.000232379
+Tick at 2020-10-21 16:49:17.22112193 &#43;0000 UTC m=&#43;1.500293464
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	ticker.Stop()</pre></td>
+    <td class=output><pre class=preo>Tick at 2020-10-21 16:49:18.057000663 &#43;0000 UTC m=&#43;0.500209920
+Tick at 2020-10-21 16:49:18.557044531 &#43;0000 UTC m=&#43;1.000253788
+Tick at 2020-10-21 16:49:19.057070021 &#43;0000 UTC m=&#43;1.500279270
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	done &lt;- true</pre></td>
+    <td class=output><pre class=preo>Tick at 2020-10-21 16:49:19.910618706 &#43;0000 UTC m=&#43;0.500249033
+Tick at 2020-10-21 16:49:20.410621395 &#43;0000 UTC m=&#43;1.000251735
+Tick at 2020-10-21 16:49:20.910741264 &#43;0000 UTC m=&#43;1.500371590
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	fmt.Println(&#34;Ticker stopped&#34;)</pre></td>
+    <td class=output><pre class=preo>Tick at 2020-10-21 16:49:21.736548374 &#43;0000 UTC m=&#43;0.500250576
+Tick at 2020-10-21 16:49:22.236535084 &#43;0000 UTC m=&#43;1.000237307
+Tick at 2020-10-21 16:49:22.736562531 &#43;0000 UTC m=&#43;1.500264739
+Ticker stopped
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo>Tick at 2020-10-21 16:49:23.554917688 &#43;0000 UTC m=&#43;0.500245535
+Tick at 2020-10-21 16:49:24.054957087 &#43;0000 UTC m=&#43;1.000284919
+Tick at 2020-10-21 16:49:24.554927622 &#43;0000 UTC m=&#43;1.500255482
+</pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

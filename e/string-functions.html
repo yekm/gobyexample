@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         The standard library&#39;s `strings` package provides many useful string-related functions. Here are some examples to give you a sense of the package.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	s &#34;strings&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         We alias `fmt.Println` to a shorter name as we&#39;ll use it a lot below.</td>
+    <td class=code><pre class="prettyprint">var p = fmt.Println</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=13>
+         Here&#39;s a sample of the functions available in `strings`. Since these are functions from the package, not methods on the string object itself, we need pass the string in question as the first argument to the function. You can find more functions in the [`strings`](http://golang.org/pkg/strings/) package docs.</td>
+    <td class=code><pre class="prettyprint">	p(&#34;Contains:  &#34;, s.Contains(&#34;test&#34;, &#34;es&#34;))</pre></td>
+    <td class=output><pre class=preo>Contains:   true
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Count:     &#34;, s.Count(&#34;test&#34;, &#34;t&#34;))</pre></td>
+    <td class=output><pre class=preo>Count:      2
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;HasPrefix: &#34;, s.HasPrefix(&#34;test&#34;, &#34;te&#34;))</pre></td>
+    <td class=output><pre class=preo>HasPrefix:  true
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;HasSuffix: &#34;, s.HasSuffix(&#34;test&#34;, &#34;st&#34;))</pre></td>
+    <td class=output><pre class=preo>HasSuffix:  true
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Index:     &#34;, s.Index(&#34;test&#34;, &#34;e&#34;))</pre></td>
+    <td class=output><pre class=preo>Index:      1
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Join:      &#34;, s.Join([]string{&#34;a&#34;, &#34;b&#34;}, &#34;-&#34;))</pre></td>
+    <td class=output><pre class=preo>Join:       a-b
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Repeat:    &#34;, s.Repeat(&#34;a&#34;, 5))</pre></td>
+    <td class=output><pre class=preo>Repeat:     aaaaa
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Replace:   &#34;, s.Replace(&#34;foo&#34;, &#34;o&#34;, &#34;0&#34;, -1))</pre></td>
+    <td class=output><pre class=preo>Replace:    f00
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Replace:   &#34;, s.Replace(&#34;foo&#34;, &#34;o&#34;, &#34;0&#34;, 1))</pre></td>
+    <td class=output><pre class=preo>Replace:    f0o
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Split:     &#34;, s.Split(&#34;a-b-c-d-e&#34;, &#34;-&#34;))</pre></td>
+    <td class=output><pre class=preo>Split:      [a b c d e]
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;ToLower:   &#34;, s.ToLower(&#34;TEST&#34;))</pre></td>
+    <td class=output><pre class=preo>ToLower:    test
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;ToUpper:   &#34;, s.ToUpper(&#34;test&#34;))</pre></td>
+    <td class=output><pre class=preo>ToUpper:    TEST
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p()</pre></td>
+    <td class=output><pre class=preo>
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         Not part of `strings`, but worth mentioning here, are the mechanisms for getting the length of a string in bytes and getting a byte by index.</td>
+    <td class=code><pre class="prettyprint">	p(&#34;Len: &#34;, len(&#34;hello&#34;))</pre></td>
+    <td class=output><pre class=preo>Len:  5
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	p(&#34;Char:&#34;, &#34;hello&#34;[1])</pre></td>
+    <td class=output><pre class=preo>Char: 101
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         Note that `len` and indexing above work at the byte level. Go uses UTF-8 encoded strings, so this is often useful as-is. If you&#39;re working with potentially multi-byte characters you&#39;ll want to use encoding-aware operations. See [strings, bytes, runes and characters in Go](https://blog.golang.org/strings) for more information.</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>

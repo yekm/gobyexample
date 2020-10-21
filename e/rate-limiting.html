@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="main.css">
+
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(68262424, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/src/lang-go.js"></script>
+<body>
+    <center><a href=../>index</a></center>
+<table>
+
+<tr class=withcomment>
+    
+    <td class=comment rowspan=1>
+         &lt;em&gt;[Rate limiting](http://en.wikipedia.org/wiki/Rate_limiting)&lt;/em&gt; is an important mechanism for controlling resource utilization and maintaining quality of service. Go elegantly supports rate limiting with goroutines, channels, and [tickers](tickers).</td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">package main</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=5>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">import (</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;fmt&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	&#34;time&#34;</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=2>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">func main() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=5>
+         First we&#39;ll look at basic rate limiting. Suppose we want to limit our handling of incoming requests. We&#39;ll serve these requests off a channel of the same name.</td>
+    <td class=code><pre class="prettyprint">	requests := make(chan int, 5)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	for i := 1; i &lt;= 5; i&#43;&#43; {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		requests &lt;- i</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	close(requests)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         This `limiter` channel will receive a value every 200 milliseconds. This is the regulator in our rate limiting scheme.</td>
+    <td class=code><pre class="prettyprint">	limiter := time.Tick(200 * time.Millisecond)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=4>
+         By blocking on a receive from the `limiter` channel before serving each request, we limit ourselves to 1 request every 200 milliseconds.</td>
+    <td class=code><pre class="prettyprint">	for req := range requests {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		&lt;-limiter</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		fmt.Println(&#34;request&#34;, req, time.Now())</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:53:50.395291385 &#43;0000 UTC m=&#43;0.200203008
+request 2 2020-10-21 16:53:50.599166533 &#43;0000 UTC m=&#43;0.404078122
+request 3 2020-10-21 16:53:50.795310384 &#43;0000 UTC m=&#43;0.600222016
+request 4 2020-10-21 16:53:50.995286879 &#43;0000 UTC m=&#43;0.800198499
+request 5 2020-10-21 16:53:51.195267593 &#43;0000 UTC m=&#43;1.000179165
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:53:51.835344603 &#43;0000 UTC m=&#43;0.200172935
+request 2 2020-10-21 16:53:52.035349525 &#43;0000 UTC m=&#43;0.400177860
+request 3 2020-10-21 16:53:52.235373114 &#43;0000 UTC m=&#43;0.600201456
+request 4 2020-10-21 16:53:52.435425931 &#43;0000 UTC m=&#43;0.800254255
+request 5 2020-10-21 16:53:52.635358659 &#43;0000 UTC m=&#43;1.000186981
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=1>
+         We may want to allow short bursts of requests in our rate limiting scheme while preserving the overall rate limit. We can accomplish this by buffering our limiter channel. This `burstyLimiter` channel will allow bursts of up to 3 events.</td>
+    <td class=code><pre class="prettyprint">	burstyLimiter := make(chan time.Time, 3)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=3>
+         Fill up the channel to represent allowed bursting.</td>
+    <td class=code><pre class="prettyprint">	for i := 0; i &lt; 3; i&#43;&#43; {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		burstyLimiter &lt;- time.Now()</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:02.816778941 &#43;0000 UTC m=&#43;0.200206237
+request 2 2020-10-21 16:54:03.016775311 &#43;0000 UTC m=&#43;0.400202600
+request 3 2020-10-21 16:54:03.216763927 &#43;0000 UTC m=&#43;0.600191169
+request 4 2020-10-21 16:54:03.416764574 &#43;0000 UTC m=&#43;0.800191909
+request 5 2020-10-21 16:54:03.616744823 &#43;0000 UTC m=&#43;1.000172050
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:04.232918831 &#43;0000 UTC m=&#43;0.200280371
+request 2 2020-10-21 16:54:04.432997938 &#43;0000 UTC m=&#43;0.400359770
+request 3 2020-10-21 16:54:04.632931045 &#43;0000 UTC m=&#43;0.600292602
+request 4 2020-10-21 16:54:04.832919318 &#43;0000 UTC m=&#43;0.800280921
+request 5 2020-10-21 16:54:05.032891925 &#43;0000 UTC m=&#43;1.000253479
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=5>
+         Every 200 milliseconds we&#39;ll try to add a new value to `burstyLimiter`, up to its limit of 3.</td>
+    <td class=code><pre class="prettyprint">	go func() {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		for t := range time.Tick(200 * time.Millisecond) {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">			burstyLimiter &lt;- t</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		}</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}()</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:10.176046549 &#43;0000 UTC m=&#43;0.200179195
+request 2 2020-10-21 16:54:10.376067042 &#43;0000 UTC m=&#43;0.400199627
+request 3 2020-10-21 16:54:10.576063101 &#43;0000 UTC m=&#43;0.600195898
+request 4 2020-10-21 16:54:10.776036879 &#43;0000 UTC m=&#43;0.800169467
+request 5 2020-10-21 16:54:10.976052867 &#43;0000 UTC m=&#43;1.000185446
+</pre></td>
+</tr>
+
+<tr class=space>
+    
+    <td class=comment rowspan=1>
+        </td>
+    <td class=code><pre class="prettyprint"></pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=comment rowspan=10>
+         Now simulate 5 more incoming requests. The first 3 of these will benefit from the burst capability of `burstyLimiter`.</td>
+    <td class=code><pre class="prettyprint">	burstyRequests := make(chan int, 5)</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	for i := 1; i &lt;= 5; i&#43;&#43; {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		burstyRequests &lt;- i</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:17.828242725 &#43;0000 UTC m=&#43;0.200199154
+request 2 2020-10-21 16:54:18.028291874 &#43;0000 UTC m=&#43;0.400248385
+request 3 2020-10-21 16:54:18.228258219 &#43;0000 UTC m=&#43;0.600214720
+request 4 2020-10-21 16:54:18.428244427 &#43;0000 UTC m=&#43;0.800200934
+request 5 2020-10-21 16:54:18.628256684 &#43;0000 UTC m=&#43;1.000213216
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:19.233902539 &#43;0000 UTC m=&#43;0.200206278
+request 2 2020-10-21 16:54:19.433884891 &#43;0000 UTC m=&#43;0.400188622
+request 3 2020-10-21 16:54:19.633922697 &#43;0000 UTC m=&#43;0.600226519
+request 4 2020-10-21 16:54:19.83391026 &#43;0000 UTC m=&#43;0.800213976
+request 5 2020-10-21 16:54:20.033891067 &#43;0000 UTC m=&#43;1.000194793
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	close(burstyRequests)</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:20.668442616 &#43;0000 UTC m=&#43;0.200238556
+request 2 2020-10-21 16:54:20.868384667 &#43;0000 UTC m=&#43;0.400180641
+request 3 2020-10-21 16:54:21.068404615 &#43;0000 UTC m=&#43;0.600200562
+request 4 2020-10-21 16:54:21.268510532 &#43;0000 UTC m=&#43;0.800306470
+request 5 2020-10-21 16:54:21.468431947 &#43;0000 UTC m=&#43;1.000227939
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	for req := range burstyRequests {</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		&lt;-burstyLimiter</pre></td>
+    <td class=output><pre class=preo></pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">		fmt.Println(&#34;request&#34;, req, time.Now())</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:22.678544517 &#43;0000 UTC m=&#43;0.200264505
+request 2 2020-10-21 16:54:22.878521123 &#43;0000 UTC m=&#43;0.400240991
+request 3 2020-10-21 16:54:23.07852738 &#43;0000 UTC m=&#43;0.600247293
+request 4 2020-10-21 16:54:23.278523098 &#43;0000 UTC m=&#43;0.800242968
+request 5 2020-10-21 16:54:23.478542539 &#43;0000 UTC m=&#43;1.000262515
+request 1 2020-10-21 16:54:23.47859248 &#43;0000 UTC m=&#43;1.000312349
+request 2 2020-10-21 16:54:23.478600138 &#43;0000 UTC m=&#43;1.000320005
+request 3 2020-10-21 16:54:23.478614967 &#43;0000 UTC m=&#43;1.000334841
+request 4 2020-10-21 16:54:23.678733121 &#43;0000 UTC m=&#43;1.200453007
+request 5 2020-10-21 16:54:23.878721299 &#43;0000 UTC m=&#43;1.400441217
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">	}</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:24.470811399 &#43;0000 UTC m=&#43;0.200246254
+request 2 2020-10-21 16:54:24.670758827 &#43;0000 UTC m=&#43;0.400193482
+request 3 2020-10-21 16:54:24.871167288 &#43;0000 UTC m=&#43;0.600601913
+request 4 2020-10-21 16:54:25.070775841 &#43;0000 UTC m=&#43;0.800210554
+request 5 2020-10-21 16:54:25.270805827 &#43;0000 UTC m=&#43;1.000240505
+request 1 2020-10-21 16:54:25.270854384 &#43;0000 UTC m=&#43;1.000289018
+request 2 2020-10-21 16:54:25.270859646 &#43;0000 UTC m=&#43;1.000294273
+request 3 2020-10-21 16:54:25.270863497 &#43;0000 UTC m=&#43;1.000298116
+request 4 2020-10-21 16:54:25.470974975 &#43;0000 UTC m=&#43;1.200409608
+request 5 2020-10-21 16:54:25.67116232 &#43;0000 UTC m=&#43;1.400596974
+</pre></td>
+</tr>
+
+<tr class=codeline>
+    
+    <td class=code><pre class="prettyprint">}</pre></td>
+    <td class=output><pre class=preo>request 1 2020-10-21 16:54:26.271738531 &#43;0000 UTC m=&#43;0.200278269
+request 2 2020-10-21 16:54:26.471727684 &#43;0000 UTC m=&#43;0.400267456
+request 3 2020-10-21 16:54:26.671712201 &#43;0000 UTC m=&#43;0.600251980
+request 4 2020-10-21 16:54:26.871703296 &#43;0000 UTC m=&#43;0.800243237
+request 5 2020-10-21 16:54:27.071760433 &#43;0000 UTC m=&#43;1.000300158
+request 1 2020-10-21 16:54:27.071817886 &#43;0000 UTC m=&#43;1.000357577
+request 2 2020-10-21 16:54:27.071835043 &#43;0000 UTC m=&#43;1.000374733
+request 3 2020-10-21 16:54:27.071840685 &#43;0000 UTC m=&#43;1.000380381
+request 4 2020-10-21 16:54:27.271919949 &#43;0000 UTC m=&#43;1.200459667
+request 5 2020-10-21 16:54:27.471947605 &#43;0000 UTC m=&#43;1.400487336
+</pre></td>
+</tr>
+
+</table>
+    <center><a href=../>index</a></center>
+</body>
